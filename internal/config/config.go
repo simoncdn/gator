@@ -11,6 +11,7 @@ const (
 
 type Config struct {
 	Db_URL string `json:"db_url"`
+	Username string `json:"current_user_name"`
 }
 
 func getConfigFilePath() (string, error){
@@ -41,4 +42,32 @@ func Read() (Config, error) {
 	}
 
 	return config, nil
+}
+
+func (cfg *Config) SetUser(username string) error {
+	cfg.Username = username
+	err := write(*cfg)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func write (cfg Config) error {
+	filePath, err := getConfigFilePath()
+	if err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(cfg)
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(filePath, data, 0666)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
