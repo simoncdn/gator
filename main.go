@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
-	configFile, err := config.GetConfigFilePath();
+	configFile, err := config.Read();
 	if err != nil {
-		fmt.Printf("Error")
+		fmt.Printf("Error %v", err)
 	}
 	fmt.Println(configFile)
 }
