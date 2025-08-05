@@ -36,6 +36,7 @@ func main() {
 	}
 	commands.Register("login", command.HandlerLogin)
 	commands.Register("register", command.HandlerRegister)
+	commands.Register("reset", command.HandlerReset)
 
 	if len(os.Args) < 2 {
 		fmt.Printf("argumenst error\n")
