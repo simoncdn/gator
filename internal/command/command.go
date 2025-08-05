@@ -2,7 +2,6 @@ package command
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/simoncdn/gator/internal/config"
 	"github.com/simoncdn/gator/internal/database"
@@ -33,5 +32,4 @@ func (c *Commands) Run(s *State, cmd Command) error {
 
 func (c *Commands) Register(name string, f func(*State, Command) error) {
 	c.CommandsList[name] = f
-	fmt.Printf("New commande register: %v\n", name)
 }

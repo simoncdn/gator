@@ -21,9 +21,9 @@ func main() {
 
 	db, err := sql.Open("postgres", cfg.DBURL)
 	if err != nil {
-		fmt.Printf("Can't connect to the database %s:", err)
+		log.Fatalf("Can't connect to the database: %v", err)
 	}
-
+	defer db.Close()
 	dbQueries := database.New(db)
 
 	programState := &command.State{
@@ -35,6 +35,7 @@ func main() {
 		CommandsList: map[string]func(*command.State, command.Command) error{},
 	}
 	commands.Register("login", command.HandlerLogin)
+	commands.Register("register", command.HandlerRegister)
 
 	if len(os.Args) < 2 {
 		fmt.Printf("argumenst error\n")

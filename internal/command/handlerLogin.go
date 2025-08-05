@@ -1,6 +1,7 @@
 package command
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -11,7 +12,12 @@ func HandlerLogin(s *State, cmd Command) error {
 
 	username := cmd.Args[0]
 
-	err := s.Cfg.SetUser(username)
+	_, err := s.DB.GetUser(context.Background(), username)
+	if err != nil {
+		return fmt.Errorf("couldn't find user: %w", err)
+	}
+
+	err = s.Cfg.SetUser(username)
 	if err != nil {
 		return fmt.Errorf("couldn't set current user: %w", err)
 	}
