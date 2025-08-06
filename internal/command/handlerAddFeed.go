@@ -17,7 +17,7 @@ func HandlerAddFeed(s *State, cmd Command) error {
 	name := cmd.Args[0]
 	url := cmd.Args[1]
 
-	user, err := s.DB.GetUser(context.Background(), s.Cfg.CurrentUserName)
+	user, err := s.DB.GetUserByName(context.Background(), s.Cfg.CurrentUserName)
 	if err != nil {
 		return fmt.Errorf("couldn't find user: %w", err)
 	}

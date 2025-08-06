@@ -40,6 +40,7 @@ func main() {
 	commands.Register("users", command.HandlerUsers)
 	commands.Register("agg", command.HandlerAgg)
 	commands.Register("addfeed", command.HandlerAddFeed)
+	commands.Register("feeds", command.HandlerFeeds)
 
 	if len(os.Args) < 2 {
 		fmt.Printf("argumenst error\n")

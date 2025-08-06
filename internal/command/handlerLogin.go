@@ -12,7 +12,7 @@ func HandlerLogin(s *State, cmd Command) error {
 
 	username := cmd.Args[0]
 
-	_, err := s.DB.GetUser(context.Background(), username)
+	_, err := s.DB.GetUserByName(context.Background(), username)
 	if err != nil {
 		return fmt.Errorf("couldn't find user: %w", err)
 	}
