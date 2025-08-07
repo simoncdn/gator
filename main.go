@@ -43,6 +43,7 @@ func main() {
 	commands.Register("addfeed", middlewareLoggedIn(command.HandlerAddFeed))
 	commands.Register("follow", middlewareLoggedIn(command.HandlerFollow))
 	commands.Register("following", middlewareLoggedIn(command.HandlerFollowing))
+	commands.Register("unfollow", middlewareLoggedIn(command.HandlerUnfollow))
 
 	if len(os.Args) < 2 {
 		fmt.Printf("argumenst error\n")
