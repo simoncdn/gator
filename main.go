@@ -39,10 +39,10 @@ func main() {
 	commands.Register("reset", command.HandlerReset)
 	commands.Register("users", command.HandlerUsers)
 	commands.Register("agg", command.HandlerAgg)
-	commands.Register("addfeed", command.HandlerAddFeed)
 	commands.Register("feeds", command.HandlerFeeds)
-	commands.Register("follow", command.HandlerFollow)
-	commands.Register("following", command.HandlerFollowing)
+	commands.Register("addfeed", middlewareLoggedIn(command.HandlerAddFeed))
+	commands.Register("follow", middlewareLoggedIn(command.HandlerFollow))
+	commands.Register("following", middlewareLoggedIn(command.HandlerFollowing))
 
 	if len(os.Args) < 2 {
 		fmt.Printf("argumenst error\n")

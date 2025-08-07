@@ -9,17 +9,12 @@ import (
 	"github.com/simoncdn/gator/internal/database"
 )
 
-func HandlerFollow(s *State, cmd Command) error {
+func HandlerFollow(s *State, cmd Command, user database.User) error {
 	if len(cmd.Args) != 1 {
 		return fmt.Errorf("usage: %s <feed_url>", cmd.Name)
 	}
 
 	url := cmd.Args[0]
-
-	user, err := s.DB.GetUserByName(context.Background(), s.Cfg.CurrentUserName)
-	if err != nil {
-		return fmt.Errorf("couldn't find the current user: %w", err)
-	}
 
 	feed, err := s.DB.GetFeedByURL(context.Background(), url)
 	if err != nil {

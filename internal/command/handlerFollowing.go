@@ -3,15 +3,12 @@ package command
 import (
 	"context"
 	"fmt"
+
+	"github.com/simoncdn/gator/internal/database"
 )
 
-func HandlerFollowing(s *State, cmd Command) error {
-	currentUser, err := s.DB.GetUserByName(context.Background(), s.Cfg.CurrentUserName) 
-	if err != nil {
-		return fmt.Errorf("couldn't get current user information: %w", err)
-	}
-
-	feeds, err := s.DB.GetFeedFollowsForUser(context.Background(), currentUser.ID)
+func HandlerFollowing(s *State, cmd Command, user database.User) error {
+	feeds, err := s.DB.GetFeedFollowsForUser(context.Background(), user.ID)
 	if err != nil {
 		return fmt.Errorf("couldn't get follows for the current user: %w", err)
 	}
